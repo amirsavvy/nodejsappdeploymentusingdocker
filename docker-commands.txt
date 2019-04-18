@@ -1,0 +1,89 @@
+1- docker --version
+2- docker run image-name(redis)
+3- docker ps --all
+4- docker create image-id
+5- docker start image-id
+6- docker stop image-id
+7- docker kill image-id
+8- docker system prune
+9- docker run redis
+10- winpty docker exec -it 5072806e44de redis-cli
+11- docker exec -it 5072806e44de sh (run linux shell, run all commands here of linux, ls, cd ~/, cd /, redis-cli)
+12- docker run -it busybox sh
+--- Run custom image from docker ---
+
+=> Manual Image Generation
+=> Step1: create "Dockerfile"
+
+1- docker build .
+2- docker build -t amirsavvy/redis:latest . (tag image with usename id and create the container)
+3- docker run amirsavvy/redis (run image with user id)
+4- docker run -it alpine sh(run shell on linux) /  winpty docker run -it alpine sh (run shell on windows)
+5- apk add --update redis (update the running container files)
+6- exit (stop and exit from shell)
+7- docker commit -c 'CMD ["redis-server"]' image-ID
+=> sha256:ab357ae31e34f349be2fd064c7bbcee5a41e192c026ea2021f12fbf3b1b11663 (copy arbitrary number and run the container)
+8- docker run ab357ae31e34f3 (this will start the container)
+Note: don't use this is practice because this is manual process
+
+------------------------------------------------------------------
+
+=> SECTION 4
+
+=> NodeJS app deployment on Dcker / Container
+1- Create NodeApp(Index.js, package.json, Dockerfile)
+2- docker build . (this will give error: /bin/sh: npm: not found)
+3- then add this into Dockerfile: # Install some dependencies: COPY ./ ./
+4- docker build . (again package.json file not found error)
+5- then add: FROM node:alpine instead of FROM alpine
+6- docker build . (will successfully create image container)
+7- docker build -t amirsavvy/simpleweb . (tag the container to the working project directory)
+8- docker run amirsavvy/simpleweb (this will not run the project into browser)
+=> need some run time port maping
+9- docker run -p 8080:8080 amirsavvy/simpleweb ((incomming port of local project)8080:8080(port in running container network), both can be changed)
+10- winpty docker run -it amirsavvy/project-name sh (run shell)
+11- winpty docker exec -it (container-ID) i.e 1011b44015bc sh (run shell)
+12- docker run -p 8080:8080 amirsavvy/simpleweb (this is will not show changed output, on 2nd time to avoid this use below commands)
+13- docker build -t amirsavvy/simpleweb . (rebuild the conatainer, to view changed output)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
